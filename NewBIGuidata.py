@@ -58,12 +58,14 @@ def app(dataset):
 	components.html(source_code,height=1200, scrolling=True)
 	st.markdown(get_binary_file_downloader_html('AnalisiEDA2_powered_by_IAI.html', 'Report'), unsafe_allow_html=True)
 	st.success("Secondo Report Generato Con Successo, per scaricarlo clicca il Link quì sopra.")
+	st.warning("Mi raccomando segnati quanto ti occorre per passare al prossimo step")
+	st.info("Ti consigliamo vivamente di scaricare il report per poterlo consultare in un secondo momento")
 
 #inizio body
 uploaded_file = st.file_uploader("Perfavore inserisci quì il file di tipo csv, usando come separatore la virgola!", type=["csv"])
 
 if uploaded_file is not None:
-    Menu = option_menu("La DataScience per tutti 🐍🔥", ["1) Analisi", "2) Pulizia Dati", "3) PreProcessing", "4) Analisi", "5) Miglior Algoritmo", "6) Implmentazione Python"],
+    Menu = option_menu("La DataScience per tutti 🐍🔥", ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5", "Step 6"],
                     icons=['clipboard-data', 'globe', 'file-pdf', 'file-earmark-spreadsheet'],
                     menu_icon="app-indicator", default_index=0,orientation='horizontal',
                     styles={
@@ -101,14 +103,15 @@ if uploaded_file is not None:
         print(e)
         st.error("Errore nel caricamento del dataset, perfavore tenta con un altro set di dati o contatta l'assistenza")
     
-    if Menu == "1) Analisi":
-        st.title("Analisi Dati 📊")
-        st.write("In questa sezione puoi fare una prima analisi dei dati, per capire se : \
-            - Ci sono valori anomali \
-            - Ci sono colonne che non servono\
-            - Ci sono valori nulli o mancanti\
-            - Ci sono valori duplicati\
-            per poi poter decidere se fare una pulizia dei dati o no.") 
+    if Menu == "Step 1":
+        st.title("Step 1 : Analisi Dati 📊")
+        with st.expander("A cosa serve questa sezione ?"):
+            st.markdown("In questa sezione puoi fare <b>una prima analisi dei dati</b>, per capire se : <br>\
+                - Ci sono valori anomali<br> \
+                - Ci sono colonne che non servono<br>\
+                - Ci sono valori nulli o mancanti<br>\
+                - Ci sono valori duplicati<br>\
+                per poi poter decidere se fare una pulizia dei dati o no.", unsafe_allow_html=True)
         
         if(st.button("Genera prima Analisi 📊 ")):
             try :
@@ -118,6 +121,8 @@ if uploaded_file is not None:
                     pr.to_file("AnalisiEDA_powered_by_IAI.html")
                     st.markdown(get_binary_file_downloader_html('AnalisiEDA_powered_by_IAI.html', 'Report'), unsafe_allow_html=True)
                     st.success("Primo Report Generato Con Successo, per scaricarlo clicca il Link quì sopra.")
+                    st.warning("Mi raccomando segnati quanto ti occorre per passare al prossimo step")
+                    st.info("Ti consigliamo vivamente di scaricare il report per poterlo consultare in un secondo momento")
                 #app(dataset)
                 
                 st.balloons()
@@ -125,13 +130,14 @@ if uploaded_file is not None:
                 print(e)
                 st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
                 
-    if Menu == "2) Pulizia Dati":
-        st.title("Pulizia Dati 🧹")
-        st.write("In questa sezione puoi fare una veloce pulizia dei dati, ad esempio potrai  : \
-            - Rimuovere valori nulli e corrotti \
-            - Rimuovere valori duplicati\
-            - Sostituire valori nulli con valori medi o mediati\
-            per poi poter poter passare al PreProcessing.")
+    if Menu == "Step 2":
+        st.title("Step 2 : Pulizia Dati 🧹")
+        with st.expander("A cosa serve questa sezione ?"):
+            st.markdown("In questa sezione puoi fare <b>una veloce pulizia dei dati,</b> ad esempio potrai  : <br> \
+                - Rimuovere valori nulli e corrotti <br> \
+                - Rimuovere valori duplicati <br>\
+                - Sostituire valori nulli con valori medi o mediati <br>\
+                per poi poter passare al prossimo step.", unsafe_allow_html=True)
         
         col1, col2, col3, col4 = st.columns(4)
         
@@ -183,22 +189,23 @@ if uploaded_file is not None:
                 print(e)
                 st.error("Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova facendo attenzioni che i dati nulli non siano testuali o categorici")
 
-    if Menu == "3) PreProcessing":
-        st.title("PreProcessing 🧪")
-        st.write("In questa sezione puoi fare eseguire operazioni di Preprocessing sui tuoi dati, ad esempio potrai  : \
-            - Fare una codifica OneHotEncoding \
-            - Fare una codifica LabelEncoding\
-            - Fare una codifica OrdinalEncoding\
-            - Fare una codifica BinaryEncoding\
-            - Fare una codifica TargetEncoding\
-            - Fare una codifica MeanEncoding\
-            - Fare una codifica CountEncoding\
-            - Fare una codifica FrequencyEncoding\
-            - Standardizzare i dati\
-            - Normalizzare i dati\
-            - Fare una riduzione della dimensionalità\
-            - Fare una riduzione della dimensionalità con PCA\
-            per poi poter passare a una seconda analisi dove scegliarai le feature più correlate con la variabile target.")
+    if Menu == "Step 3":
+        st.title("Step 3 : PreProcessing 🧪")
+        with st.expander("A cosa serve questa sezione ?"):
+            st.markdown("In questa sezione puoi <b>eseguire operazioni di Preprocessing sui tuoi dati</b>, ad esempio potrai  : <br>\
+                - Fare una codifica OneHotEncoding<br>\
+                - Fare una codifica LabelEncoding<br>\
+                - Fare una codifica OrdinalEncoding<br>\
+                - Fare una codifica BinaryEncoding<br>\
+                - Fare una codifica TargetEncoding<br>\
+                - Fare una codifica MeanEncoding<br>\
+                - Fare una codifica CountEncoding<br>\
+                - Fare una codifica FrequencyEncoding<br>\
+                - Standardizzare i dati<br>\
+                - Normalizzare i dati<br>\
+                - Fare una riduzione della dimensionalità<br>\
+                - Fare una riduzione della dimensionalità con PCA<br>\
+                per poi poter passare a una seconda analisi dove scegliarai le feature più correlate con la variabile target.")
         
         task = [ "Codifica OneHotEncoding", "Codifica LabelEncoding", "Codifica OrdinalEncoding", "Codifica BinaryEncoding", "Codifica TargetEncoding", "Codifica MeanEncoding", "Codifica CountEncoding", "Codifica FrequencyEncoding"]
         colonna_da_codificare = st.selectbox("Seleziona la colonna da codificare", dataset.columns)
@@ -273,66 +280,7 @@ if uploaded_file is not None:
                 st.error("Errore durante la codifica, controlla di aver selezionato la colonna e la codifica da eseguire")
                 st.error(e)
                 
-        col1 , col2, col3 = st.columns(3)
-        
-        if ( col1.button("Normalizza Dataset (solo valori numerici)")):
-            try:
-                datasetMM = dataset
-                numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-                datasetMM = datasetMM.select_dtypes(include=numerics)
-                datasetMM = datasetMM.dropna()
-                min_max_scaler = preprocessing.MinMaxScaler()
-                datasetMM = min_max_scaler.fit_transform(datasetMM)
-                datasetMM = pd.DataFrame(datasetMM)
-                datasetMM.columns = dataset.select_dtypes(include=numerics).columns
-                datasetMM = datasetMM.join(dataset.select_dtypes(exclude=numerics))
-                datasetMM.to_csv('DatasetNormalizzato.csv', sep=',', index=False)
-                st.markdown(get_binary_file_downloader_html('DatasetNormalizzato.csv', 'Scarica i tuoi Dati Normalizzati'), unsafe_allow_html=True)
-                st.success("Dati Normalizzati con successo, per scaricarli clicca il Link quì sopra.")
-                st.balloons()
-            except Exception as e:
-                print(e)
-                st.error("Errore durante la normalizzazione, controlla di aver selezionato solo valori numerici")
-            
-        if( col2.button("Standardizza Dataset (solo valori numerici)")):
-            try:
-                datasetMM = dataset
-                numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-                datasetMM = datasetMM.select_dtypes(include=numerics)
-                datasetMM = datasetMM.dropna()
-                scaler = preprocessing.StandardScaler()
-                datasetMM = scaler.fit_transform(datasetMM)
-                datasetMM = pd.DataFrame(datasetMM)
-                datasetMM.columns = dataset.select_dtypes(include=numerics).columns
-                datasetMM = datasetMM.join(dataset.select_dtypes(exclude=numerics))
-                datasetMM.to_csv('DatasetStandardizzato.csv', sep=',', index=False)
-                st.markdown(get_binary_file_downloader_html('DatasetStandardizzato.csv', 'Scarica i tuoi Dati Standardizzati'), unsafe_allow_html=True)
-                st.success("Dati Standardizzati con successo, per scaricarli clicca il Link quì sopra.")
-                st.balloons()
-            except Exception as e:
-                print(e)
-                st.error("Errore durante la standardizzazione, controlla di aver selezionato solo valori numerici")
-                
-            if( col3.button("Analisi componenti principali (solo valori numerici)")):
-                try:
-                    from sklearn.decomposition import PCA
-                    datasetMM = dataset
-                    numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-                    datasetMM = datasetMM.select_dtypes(include=numerics)
-                    datasetMM = datasetMM.dropna()
-                    pca = PCA(n_components=2)
-                    datasetMM = pca.fit_transform(datasetMM)
-                    datasetMM = pd.DataFrame(datasetMM)
-                    datasetMM.columns = dataset.select_dtypes(include=numerics).columns
-                    datasetMM = datasetMM.join(dataset.select_dtypes(exclude=numerics))
-                    datasetMM.to_csv('DatasetPCA.csv', sep=',', index=False)
-                    st.markdown(get_binary_file_downloader_html('DatasetPCA.csv', 'Scarica i tuoi Dati PCA'), unsafe_allow_html=True)
-                    st.success("Dati PCA con successo, per scaricarli clicca il Link quì sopra.")
-                    st.balloons()
-                except Exception as e:
-                    print(e)
-                    st.error("Errore durante la PCA, controlla di aver selezionato solo valori numerici")
-                    
+            ##DA AGGIUNGERE STANDARDIZZAZIONE E MINIMIZZAZIONE
             q = st.text_input("Scrivi qui dentro la tua Query", value="SELECT * FROM dataset")
             if st.button("Applicami questa Query SQL sui miei dati"):
                 try :
@@ -346,32 +294,35 @@ if uploaded_file is not None:
                     print(e)
                     st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva, riprova')
         
-    if Menu == "4) Analisi" :
-        st.title("Analisi Dati 📊")
-        st.write("In questa sezione puoi fare la seconda analisi dei tuoi dati una volta pre elaborati, questa sezione ti servirà per : \
-            - Capire se i tuoi dati sono bilanciati o no \
-            - Capire se i tuoi dati sono normalmente distribuiti o no \
-            - Capire se i tuoi dati sono correlati o no \
-            - Capire se i tuoi dati sono outliers o no \
-            - Capire se i tuoi dati sono lineari o no \
-            - Capire se i tuoi dati sono gaussiani o no \
-            - Capire quali saranno le variabili più importanti per il modello \
-            - Capire quali variabili saranno inutili per il modello \
-            per poi poter scoprire quale sarà il miglior algoritmo per il tuo dataset")
+    if Menu == "Step 4" :
+        st.title("Step 4 : Seconda Analisi dei Dati 📊")
+        with st.expander("A cosa serve questa sezione ?"):
+            st.markdown("In questa sezione puoi fare la <b>seconda analisi dei tuoi dati una volta pre elaborati</b>, questa sezione ti servirà per : <br>\
+                - Capire se i tuoi dati sono bilanciati o no<br> \
+                - Capire se i tuoi dati sono normalmente distribuiti o no<br> \
+                - Capire se i tuoi dati sono correlati o no<br> \
+                - Capire se i tuoi dati sono outliers o no<br> \
+                - Capire se i tuoi dati sono lineari o no<br> \
+                - Capire se i tuoi dati sono gaussiani o no <br>\
+                - Capire quali saranno le variabili più importanti per il modello<br> \
+                - Capire quali variabili saranno inutili per il modello<br> \
+                per poi poter scoprire quale sarà il miglior algoritmo per il tuo dataset", unsafe_allow_html=True)
         
         if st.button("Procedi con la nuova analisi 📊"):
             try:
                 with st.spinner("Analisi in corso..."):
                     app(dataset)
+                    
             except Exception as e:
                 st.error("Errore durante l'analisi, controlla di aver caricato il dataset")
                 print(e)
             
-    if Menu == "5) Miglior Algoritmo":
-        st.title("Miglior Algoritmo 🤖")
-        st.write("In questa sezione puoi scoprire quale sarà il miglior algoritmo per il tuo dataset, questa sezione ti servirà per : \
-            - Capire quale sarà il miglior algoritmo per il tuo dataset \
-            per poi poterlo implementare o farlo implementare automaticamente nel prossimo step")
+    if Menu == "Step 5":
+        st.title("Step 5 : Scopri il Miglior Algoritmo 🤖")
+        with st.expander("A cosa serve questa sezione ?"):
+            st.markdown("In questa sezione puoi scoprire quale sarà il miglior algoritmo per il tuo dataset, questa sezione ti servirà per : <br>\
+                - Capire quale sarà il miglior algoritmo per il tuo dataset <br>\
+                per poi poterlo implementare o farlo implementare automaticamente nel prossimo step <br>", unsafe_allow_html=True)
         
         datasetMalgo = dataset
         numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
@@ -427,11 +378,12 @@ if uploaded_file is not None:
                         print(e)
                         st.error('Mannaggia, ci dispiace qualcosa non è andato come doveva. Prova a ridimensionare o campionare il tuo dataset, oppure a cambiare il tipo di problema (Classificazione o Regressione).')
 
-    if Menu == "6) Implementazione Algoritmo":
-        st.title("Implementazione Algoritmo 🤖")
-        st.write("In questa sezione puoi implementare il miglior algoritmo per il tuo dataset, questa sezione ti servirà per : \
-            - Implementare il miglior algoritmo per il tuo dataset \
-            per poi poterlo utilizzare per fare predizioni")
+    if Menu == "Step 6":
+        st.title("Step 6 : Implementazione Algoritmo 🤖")
+        with st.expander("A cosa serve questa sezione ?"):
+            st.markdown("In questa sezione puoi implementare il miglior algoritmo per il tuo dataset, questa sezione ti servirà per :<br> \
+                - Implementare il miglior algoritmo per il tuo dataset<br> \
+                per poi poterlo utilizzare per fare predizioni", unsafe_allow_html=True)	
         
         datasetPalgo = dataset
         numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
